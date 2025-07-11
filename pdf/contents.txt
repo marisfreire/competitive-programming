@@ -1,0 +1,48 @@
+$
+# First line is the divisor character used to separate the file name from it's title!!!
+# Don't change the first line!!!
+
+# Any line followed by a '#' character is ignored
+# Section headings must be in square brackets
+# Subsections within a section should follow the format:
+# (filename within code directory)(divisor character:$)(subsection title)
+# div character:$
+
+[Basics]
+../lib/Basics/basic.cpp  $ basic
+
+[Data Structures]
+../lib/Data Structures/SegTree.cpp        $ SegTree
+../lib/Data Structures/SegTreeLazy.cpp    $ SegTreeLazy
+../lib/Data Structures/BIT.cpp            $ BIT
+../lib/Data Structures/MergeSortTree.cpp  $ MergeSortTree
+../lib/Data Structures/PrefixSum2D.cpp    $ PrefixSum2D
+
+[Geometry]
+../lib/Geometry/Geometry - General.cpp  $ Geometry - General
+
+[Graphs]
+../lib/Graphs/Dijkstra.cpp        $ Dijkstra
+../lib/Graphs/BFS.cpp             $ BFS
+../lib/Graphs/DFS.cpp             $ DFS
+../lib/Graphs/DSU.cpp             $ DSU
+../lib/Graphs/MinCostMaxFlow.cpp  $ MinCostMaxFlow
+../lib/Graphs/Kruskal.cpp         $ Kruskal
+
+[dp]
+../lib/dp/LIS.cpp              $ LIS
+../lib/dp/subsetSum.cpp        $ subsetSum
+../lib/dp/LCS.cpp              $ LCS
+../lib/dp/SumOVerSubsetDP.cpp  $ SumOVerSubsetDP
+../lib/dp/knapsack.cpp         $ knapsack
+
+[Strings]
+../lib/Strings/trie.cpp  $ trie
+../lib/Strings/KMP.cpp   $ KMP
+
+[Math]
+../lib/Math/totient.cpp  $ totient
+../lib/Math/sieve.cpp    $ sieve
+../lib/Math/ModComb.cpp  $ ModComb
+
+
