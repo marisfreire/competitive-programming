@@ -1,21 +1,3 @@
-// Euler Path / Euler Cycle
-//
-// Para declarar: 'euler<true> E(n);' se quiser
-// direcionado e com 'n' vertices
-// As funcoes retornam um par com um booleano
-// indicando se possui o cycle/path que voce pediu,
-// e um vector de {vertice, id da aresta para chegar no vertice}
-// Se for get_path, na primeira posicao o id vai ser -1
-// get_path(src) tenta achar um caminho ou ciclo euleriano
-// comecando no vertice 'src'.
-// Se achar um ciclo, o primeiro e ultimo vertice serao 'src'.
-// Se for um P3, um possiveo retorno seria [0, 1, 2, 0]
-// get_cycle() acha um ciclo euleriano se o grafo for euleriano.
-// Se for um P3, um possivel retorno seria [0, 1, 2]
-// (vertie inicial nao repete)
-//
-// O(n+m)
-
 template<bool directed=false> struct euler {
 	int n;
 	vector<vector<pair<int, int>>> g;

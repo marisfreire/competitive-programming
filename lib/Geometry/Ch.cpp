@@ -1,5 +1,6 @@
 #include "Point.cpp" //LATEX_IGNORED_LINE
 #include "Segment.cpp" //LATEX_IGNORED_LINE
+#include <bits/stdc++.h>
 using namespace std;
 
 /*LATEX_DESC_BEGIN***************************
