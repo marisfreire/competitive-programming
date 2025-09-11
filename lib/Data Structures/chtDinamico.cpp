@@ -1,13 +1,3 @@
-// Convex Hull Trick Dinamico
-//
-// para double, use LINF = 1/.0, div(a, b) = a/b
-// update(x) atualiza o ponto de intersecao da reta x
-// overlap(x) verifica se a reta x sobrepoe a proxima
-// add(a, b) adiciona reta da forma ax + b
-// query(x) computa maximo de ax + b para entre as retas
-//
-// O(log(n)) amortizado por insercao
-// O(log(n)) por query
 
 struct Line {
 	mutable ll a, b, p;
@@ -44,7 +34,24 @@ struct dynamic_hull : multiset<Line, less<>> {
 	ll query(ll x) {
 		assert(!empty());
 		auto l = *lower_bound(x);
-#warning cuidado com overflow!
+
 		return l.a * x + l.b;
 	}
 };
+
+
+/*LATEX_DESC_BEGIN***************************
+
+	Convex Hull Trick Dinâmico
+	Para double, use LINF = 1/.0, div (a,b) = a/b
+	
+	update(x) atualiza o ponto de interseção da reta x
+	overlap(x) verifica se a reta x sobrepõe a próxima
+	add(a,b) adiciona reta da forma ax + b
+	query(x) computa máximo de ax + b para entre as retas
+
+	O(log(n)) amortizado por inserção
+	O(log(n)) por query
+
+	Cuidado com overflow
+*****************************LATEX_DESC_END*/

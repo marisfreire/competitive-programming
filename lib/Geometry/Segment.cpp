@@ -1,6 +1,6 @@
 #include "Point.cpp" //LATEX_IGNORED_LINE
 
-//if p is on segment s to e
+
 bool onSegment(PT s, PT e, PT p){ 
 	return p.cross(s, e) == 0 && (s-p) * (e-p) <= 0;
 }

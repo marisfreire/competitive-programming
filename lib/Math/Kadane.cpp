@@ -1,5 +1,5 @@
-// Time Complexity: O(arr.size())
-ll kadane(vector<ll> &arr) { // Max Subarray Sum
+
+ll kadane(vector<ll> &arr) {
     ll answ = arr[0];
     ll maxEnding = arr[0];
 
@@ -11,3 +11,9 @@ ll kadane(vector<ll> &arr) { // Max Subarray Sum
 
     return answ;
 }
+
+/*LATEX_DESC_BEGIN***************************
+    Algoritmo de Kadane
+    Consegue o max subarray sum
+    O(N)  
+*****************************LATEX_DESC_END*/

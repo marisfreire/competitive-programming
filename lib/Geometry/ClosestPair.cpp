@@ -1,5 +1,3 @@
-//Encontrar o par de pontos que têm a menor distância Euclidiana entre si, 
-//usando uma abordagem eficiente O(n log n))
 
 pii ClosestPair(vector<PT<ll>>& pts) {
     ll dist = (pts[0]-pts[1]).dist2();
@@ -31,3 +29,9 @@ pii ClosestPair(vector<PT<ll>>& pts) {
         swap(ans.first, ans.second);
     return ans;
 }
+
+
+/*LATEX_DESC_BEGIN***************************
+    Closest pairs - Par de pontos que têm a menor distância Euclidiana entre si
+    O(n log n)
+*****************************LATEX_DESC_END*/

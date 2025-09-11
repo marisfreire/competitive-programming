@@ -18,8 +18,7 @@ int tot(int n) {
 }
 
 /*LATEX_DESC_BEGIN***************************
-   Totiente de Euler - Conta quantos números de 1 até n são corpimos de n
-   
+   Totiente de Euler - Conta quantos números de 1 até n são coprimos de n
 
    Complexidade:
    O(sqrt(n))

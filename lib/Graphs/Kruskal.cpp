@@ -8,12 +8,11 @@ const int MAXN = 1e6 + 5;
 struct Aresta{ int u, v, c; };
 bool compAresta(Aresta a, Aresta b){ return a.c < b.c; }
 
-vector<Aresta> arestas; 			//Lista de Arestas
+vector<Aresta> arestas; 			
 
 int kruskal(){
-	sort(begin(arestas), end(arestas), compAresta);	//Ordena pelo custo
-	int resp = 0;					//Custo total da MST
-
+	sort(begin(arestas), end(arestas), compAresta);	
+	int resp = 0;					
 	for(auto a : arestas)
 		if( find(a.u) != find(a.v) )
 		{

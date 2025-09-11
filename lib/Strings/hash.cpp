@@ -27,7 +27,7 @@ struct StringHash{
 		return (MOD + hsh[r+1] - hsh[l]*expb[r-l+1] % MOD ) % MOD;
 	}
 };
-/******************************************************
+/*LATEX_DESC_BEGIN***************************
 String Hash
 precalc()    -> O(N)
 StringHash() -> O(|S|)
@@ -40,4 +40,4 @@ IMPORTANTE! Chamar precalc() no início do código
 
 const ll MOD  = 131'807'699; -> Big Prime Number 
 const ll base = 127;         -> Random number larger than the Alphabet
-*******************************************************/
+*****************************LATEX_DESC_END*/

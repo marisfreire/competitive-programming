@@ -1,12 +1,3 @@
-// Li-Chao Tree
-//
-// Adiciona retas (ax+b), e computa o minimo entre as retas
-// em um dado 'x'
-// Cuidado com overflow!
-// Se tiver overflow, tenta comprimir o 'x' ou usar
-// convex hull trick
-//
-// O(log(MA-MI)), O(n) de memoria
 
 template<ll MI = ll(-1e9), ll MA = ll(1e9)> struct lichao {
 	struct line {
@@ -44,3 +35,14 @@ template<ll MI = ll(-1e9), ll MA = ll(1e9)> struct lichao {
 		return min(ret, query(x, m+1, r, ch(p, 1)));
 	}
 };
+
+
+/*LATEX_DESC_BEGIN***************************
+
+	Li-Chao Tree
+	Adiciona retas (ax+b) e computa o mínimo entre as retas em um dado x
+	Cuidado com overflow, se tiver tenta comprimir o x ou usar convex hull trick
+
+	O(log(MA - MI)) de tempo
+	O(n) memoria
+*****************************LATEX_DESC_END*/

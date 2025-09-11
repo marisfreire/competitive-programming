@@ -1,6 +1,4 @@
-#include "Point.cpp" //LATEX_IGNORED_LINE
-#include "Segment.cpp" //LATEX_IGNORED_LINE
-using namespace std;
+#
 
 /*BLOCK_DESC_BEGIN 
 Returns **twice area of a simple polygon**. area*2 (Shoelace Formula: signed cross product sum)

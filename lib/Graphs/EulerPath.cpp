@@ -28,7 +28,7 @@ template<bool directed=false> struct euler {
 		g[a].emplace_back(b, at);
 		if (!directed) g[b].emplace_back(a, at);
 	}
-#warning chamar para o src certo!
+
 	pair<bool, vector<pair<int, int>>> get_path(int src) {
 		if (!used.size()) return {true, {}};
 		vector<int> beg(n, 0);
@@ -66,3 +66,22 @@ template<bool directed=false> struct euler {
 		return ans;
 	}
 };
+
+/*LATEX_DESC_BEGIN***************************
+	Euler Path / Euler Cycle
+	Para declarar: euler<true> E(n) se for direcionado com N vertices
+	As funções retornam um par
+		- Booleano indica se há o path/cycle pedido
+		- Vetor é formada de {vertice, id aresta para chegar no vertice}
+
+	Se for get_path, na primeira posicao o id vai ser -1
+	get_path(src) tenta achar um caminho ou ciclo euleriano, começando no src
+#warning chamar para o src certo!
+	Se achar um ciclo, o primeiro e o ultimo vertice seram src
+	Se for um P3, um possível retorno seria [0, 1, 2, 0]
+	get_cycle() acha um ciclo euleriano se o grafo for euleriano
+	Se for um P3, um possível retorno seria [0,1,2]
+	(Vértice inicial não se repete)
+
+	O(n + m)
+*****************************LATEX_DESC_END*/

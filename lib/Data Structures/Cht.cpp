@@ -36,3 +36,13 @@ struct CHT {
 		return eval(it, x);
 	}
 };
+
+
+/*LATEX_DESC_BEGIN***************************
+	Convex Hull Trick Estático
+	Adds tem que serem feitos em ordem de slope
+	Queries tem que ser feitas em ordem de x
+
+	Add O(1) amortizado
+	Get O(1) amortizado
+*****************************LATEX_DESC_END*/

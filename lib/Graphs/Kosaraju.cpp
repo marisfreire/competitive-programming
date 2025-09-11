@@ -1,13 +1,10 @@
-// Kosaraju
-//
-// O(n + m)
 
 int n;
-vector<int> g[MAXN]; //(a vai para b)
-vector<int> gi[MAXN]; // grafo reverso (b vai para a)
+vector<int> g[MAXN]; 
+vector<int> gi[MAXN]; 
 bool vis[MAXN];
 stack<int> S;
-int comp[MAXN]; //componente conexo de cada vertice
+int comp[MAXN]; 
 vector<int> condensed[MAXN];
 set<int> sccs;
 int num_scc = 0;
@@ -51,8 +48,6 @@ void kosaraju(){
     }
 }
  
-//grafo condensado apenas com as sccs
-//analisa os graus de entrada e saida de cada sccs
 void graph_condensed(){
  
     for (int i = 0; i < n; i++)
@@ -66,10 +61,8 @@ void graph_condensed(){
         grauSaida[i] = 0;
     }
     
-    //contar os sinks e sources
     sink = 0; source = 0;
  
-    //contruir o grafo condensado
     for (int u = 0; u < n; u++)
     {
         for(auto v : g[u]){
@@ -90,3 +83,18 @@ void graph_condensed(){
     }
 }
  
+
+/*LATEX_DESC_BEGIN***************************
+    Kosaraju (Grafos fortemente conexos)
+
+    g é o grafo (a vai para b)
+    gi é o grafo reverso (b vai para a)
+
+    comp é o componente conexo de cada vértice
+
+    graph_condensed() grafo condensado apenas com as sccs
+    analisa os graus de entrada e saídas de cadas sccs
+
+
+    O(m + n)
+*****************************LATEX_DESC_END*/

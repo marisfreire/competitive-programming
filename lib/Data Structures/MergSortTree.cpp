@@ -1,36 +1,8 @@
-// MergeSort Tree
-//
-// Se for construida sobre um array:
-//		count(i, j, a, b) retorna quantos
-//		elementos de v[i..j] pertencem a [a, b]
-//		report(i, j, a, b) retorna os indices dos
-//		elementos de v[i..j] que pertencem a [a, b]
-//		retorna o vetor ordenado
-// Se for construida sobre pontos (x, y):
-//		count(x1, x2, y1, y2) retorna quantos pontos
-//		pertencem ao retangulo (x1, y1), (x2, y2)
-//		report(x1, x2, y1, y2) retorna os indices dos pontos que
-//		pertencem ao retangulo (x1, y1), (x2, y2)
-//		retorna os pontos ordenados lexicograficamente
-//		(assume x1 <= x2, y1 <= y2)
-//
-// kth(y1, y2, k) retorna o indice do ponto com k-esimo menor
-// x dentre os pontos que possuem y em [y1, y2] (0 based)
-// Se quiser usar para achar k-esimo valor em range, construir
-// com ms_tree t(v, true), e chamar kth(l, r, k)
-//
-// Usa O(n log(n)) de memoria
-//
-// Complexidades:
-// construir - O(n log(n))
-// count - O(log(n))
-// report - O(log(n) + k) para k indices retornados
-// kth - O(log(n))
 
 template <typename T = int> struct ms_tree {
 	vector<tuple<T, T, int>> v;
 	int n;
-	vector<vector<tuple<T, T, int>>> t; // {y, idx, left}
+	vector<vector<tuple<T, T, int>>> t;
 	vector<T> vy;
 
 	ms_tree(vector<pair<T, T>>& vv) : n(vv.size()), t(4*n), vy(n) {
@@ -39,14 +11,14 @@ template <typename T = int> struct ms_tree {
 		build(1, 0, n-1);
 		for (int i = 0; i < n; i++) vy[i] = get<0>(t[1][i+1]);
 	}
-	ms_tree(vector<T>& vv, bool inv = false) { // inv: inverte indice e valor
+	ms_tree(vector<T>& vv, bool inv = false) { 
 		vector<pair<T, T>> v2;
 		for (int i = 0; i < vv.size(); i++)
 			inv ? v2.push_back({vv[i], i}) : v2.push_back({i, vv[i]});
 		*this = ms_tree(v2);
 	}
 	void build(int p, int l, int r) {
-		t[p].push_back({get<0>(v[l]), get<0>(v[r]), 0}); // {min_x, max_x, 0}
+		t[p].push_back({get<0>(v[l]), get<0>(v[r]), 0}); 
 		if (l == r) return t[p].push_back({get<1>(v[l]), get<2>(v[l]), 0});
 		int m = (l+r)/2;
 		build(2*p, l, m), build(2*p+1, m+1, r);
@@ -105,3 +77,33 @@ template <typename T = int> struct ms_tree {
 		return dfs(1, get_l(y1), get_r(y2));
 	}
 };
+
+
+/*LATEX_DESC_BEGIN***************************
+
+	MergeSort Tree
+
+	Se for construída sobre um array:
+		count(i, j, a , b) retorna quantos elementos de v[i.. j] pertencem a [a,b]
+		report(i, j, a, b) retorna os indices dos elementos de v[i..j] que pertencem a [a,b]
+		retorna o vetor ordenado
+	
+	Se for construída sobre pontos(x,y):
+		count(x1, x2, y1, y2) retorna quantos pontos pertencem ao retângulo (x1,y1), (x2,y2)
+		report(x1, x2, y1, y2) retorna os indices dos pontos que pertencem ao retângulo (x1,y1), (x2, y2)
+		retorna os pontos ordenados lexicograficamente (assume x1 <= x2, y1 <= y2)
+
+	kth(y1, y2, k) retorna o indice do ponto com k-esimo menor x dentro os pontos que possuem y em [y1,y2] (0 based)
+	se quiser usar para achar k-esimo valor em range, construir com ms_tree t(v,true), e chamar kth(l, r, k)
+
+	Vetor t {y, idx, left}
+	inv = true inverte indice e valor
+
+	O(n log(n)) Memória
+
+	Build O(n (log n))
+	Count O(log(n))
+	Report O(log(n) + k) para k indices retornados
+	kth - O(log(n))
+
+*****************************LATEX_DESC_END*/

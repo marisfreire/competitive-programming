@@ -25,8 +25,8 @@ vector<int> manacher(string &st){
 	return p;
 }
 
-/******************
+/*LATEX_DESC_BEGIN***************************
 Manacher Algorithm
 Find every palindrome in string
 Complexidade: O(N)
-******************/
+*****************************LATEX_DESC_END*/

@@ -54,7 +54,7 @@ struct MCMF {
 			}
 		}
 
-		for(int u=0; u<n; u++)  //fix pot
+		for(int u=0; u<n; u++)  
 			if(dist[u] < INF) 
 				pot[u] += dist[u];
 
@@ -62,8 +62,7 @@ struct MCMF {
 	}
 
 	pair<ll, ll> augment(){
-		ll flow = edges[from[sink]].cap, cost = 0; //fixed flow: flow = min(flow, remainder)
-
+		ll flow = edges[from[sink]].cap, cost = 0; 
 		for(int v=sink; v != source; v = edges[from[v]].u)
 			flow = min(flow, edges[from[v]].cap), 
 			cost += edges[from[v]].cost;
