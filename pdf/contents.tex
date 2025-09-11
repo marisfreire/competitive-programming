@@ -1,0 +1,757 @@
+\section{Basics}
+\vspace{-2pt}
+\subsection{basic}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+
+    STL find() retorna iterador se achou, se nao achou retorna container.end()
+   
+   Complexidade:
+   -> Set, map:  O(logN)
+   -> List, vector, deques, arrays: O(n)
+   -> Unordered maps without collisions: O(1)
+
+    STL lower_bound() e upper_bound() 
+    Precisa sortar antes
+    Lower retorna primeiro maior ou igual a target
+    Upper retorna maior que o target
+    Complexidade O(logN)
+
+    
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Basics/basic.cpp}
+\hrulefill
+
+
+\section{Data Structures}
+\vspace{-2pt}
+\subsection{SegTree}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+
+Code by SamuellH12
+-> Segment Tree com:
+	- Query em Range
+	- Update em Ponto
+
+build (1, 1, n, lista);
+query (1, 1, n, a, b);
+update(1, 1, n, i, x);
+
+|   n    | tamanho
+| [a, b] | intervalo da busca 
+|   i    | posicao a ser modificada
+|   x    | novo valor da posicao i
+| lista  | vector de elementos originais
+
+Build:  O(N)
+Query:  O(log N)
+Update: O(log N)
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Data Structures/SegTree.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{SegTreeLazy}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+
+Code by SamuelllH12
+-> Segment Tree - Lazy Propagation com:
+- Query em Range
+- Update em Range
+
+build (1, 1, n, lista);
+query (1, 1, n, a, b);
+update(1, 1, n, a, b, x);
+
+|   n    | o tamanho maximo da lista
+| [a, b] | o intervalo da busca ou update
+|   x    | o novo valor a ser somada no intervalo [a, b]
+| lista  | o array de elementos originais
+
+Build:  O(N)
+Query:  O(log N)
+Update: O(log N)
+Unlazy: O(1)
+
+
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Data Structures/SegTreeLazy.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{BIT}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+
+    BIT - Fenwick Tree
+
+    Complexidade:
+    - Build: O(n)
+    - Single Update: O(log n)
+    - Query: O(log n)
+
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Data Structures/BIT.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{MergeSortTree}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+    MergeSort Tree
+
+    Se for construida sobre um array:
+    	count(i, j, a, b) retorna quantos
+    	elementos de v[i..j] pertencem a [a, b]
+    	report(i, j, a, b) retorna os indices dos
+    	elementos de v[i..j] que pertencem a [a, b]
+    	retorna o vetor ordenado
+    Se for construida sobre pontos (x, y):
+        count(x1, x2, y1, y2) retorna quantos pontos
+        pertencem ao retangulo (x1, y1), (x2, y2)
+        report(x1, x2, y1, y2) retorna os indices dos pontos que
+        pertencem ao retangulo (x1, y1), (x2, y2)
+        retorna os pontos ordenados lexicograficamente
+        (assume x1 <= x2, y1 <= y2)
+
+    kth(y1, y2, k) retorna o indice do ponto com k-esimo menor x dentre os pontos que possuem y em [y1, y2] (0 based) 
+    Se quiser usar para achar k-esimo valor em range, construir com ms_tree t(v, true), e chamar kth(l, r, k)
+
+Usa O(n log(n)) de memoria
+    Complexidades:
+    construir - O(n log(n))
+    count - O(log(n))
+    report - O(log(n) + k) para k indices retornados
+    kth - O(log(n))
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Data Structures/MergeSortTree.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{PrefixSum2D}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+Code by SamuellH12
+Complexidade:
+-> Calcular:  O(@$ N^{2}$@)
+-> Queries:	  O(1)
+
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Data Structures/PrefixSum2D.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{LiChaoTree}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+
+	Li-Chao Tree
+	Adiciona retas (ax+b) e computa o minimo entre as retas em um dado x
+	Cuidado com overflow, se tiver tenta comprimir o x ou usar convex hull trick
+
+	O(log(MA - MI)) de tempo
+	O(n) memoria
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Data Structures/Lichao.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{MergSortTreeMaleta}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+
+	MergeSort Tree
+
+	Se for construida sobre um array:
+		count(i, j, a , b) retorna quantos elementos de v[i.. j] pertencem a [a,b]
+		report(i, j, a, b) retorna os indices dos elementos de v[i..j] que pertencem a [a,b]
+		retorna o vetor ordenado
+
+	Se for construida sobre pontos(x,y):
+		count(x1, x2, y1, y2) retorna quantos pontos pertencem ao retangulo (x1,y1), (x2,y2)
+		report(x1, x2, y1, y2) retorna os indices dos pontos que pertencem ao retangulo (x1,y1), (x2, y2)
+		retorna os pontos ordenados lexicograficamente (assume x1 <= x2, y1 <= y2)
+
+	kth(y1, y2, k) retorna o indice do ponto com k-esimo menor x dentro os pontos que possuem y em [y1,y2] (0 based)
+	se quiser usar para achar k-esimo valor em range, construir com ms_tree t(v,true), e chamar kth(l, r, k)
+
+	Vetor t {y, idx, left}
+	inv = true inverte indice e valor
+
+	O(n log(n)) Memoria
+
+	Build O(n (log n))
+	Count O(log(n))
+	Report O(log(n) + k) para k indices retornados
+	kth - O(log(n))
+
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Data Structures/MergSortTree.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{CHT}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+	Convex Hull Trick Estatico
+	Adds tem que serem feitos em ordem de slope
+	Queries tem que ser feitas em ordem de x
+
+	Add O(1) amortizado
+	Get O(1) amortizado
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Data Structures/Cht.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{CHTDinamico}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+
+	Convex Hull Trick Dinamico
+	Para double, use LINF = 1/.0, div (a,b) = a/b
+
+	update(x) atualiza o ponto de intersecao da reta x
+	overlap(x) verifica se a reta x sobrepoe a proxima
+	add(a,b) adiciona reta da forma ax + b
+	query(x) computa maximo de ax + b para entre as retas
+
+	O(log(n)) amortizado por insercao
+	O(log(n)) por query
+
+	Cuidado com overflow
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Data Structures/chtDinamico.cpp}
+\hrulefill
+
+
+\section{Geometry}
+\vspace{-2pt}
+\subsection{Geometry - General}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+
+
+   PONTO & VETOR
+    th e radianos
+    angle calcula o angulo do vetor com o eixo x
+    sarea calcula area com sinal
+    col se p, q e r sao colin.
+    ccw e counter-clockwise (antihorario)
+    rotaciona 90 graus
+
+
+    RETA
+    isvert - se e vertical
+    isinseg - ponto pertence ao segmento
+    get_t - ponto intersecao
+    proj - projecao cartesiana
+    inter - intercecao de dois segmentos
+    interseg - se dois segmentos se interceptam
+    distseg - distancia entre dois segmentos
+
+    POLIGONO
+
+    cut_polygon -> corta poligono com a reta r O(n)
+    dist_rect -> distancia entre os retangulos a e b (lados paralelos aos eixos), assume que ta representado (inferior esquerdo, superior direito)
+    pol_area -> area do poligono
+    inpol -> O(n) retorna 0 se ta fora,1 se ta no interior e 2 se ta na borda
+    interpol -> se dois poligonos se intersectam - O(n*m)
+    distpol -> distancia entre poligonos
+    convex hull - O(n log(n)) nao pode ter ponto colinear no convex hull
+    is_inside -> se o ponto ta dentro do hull - O(log(n))
+    extreme -> ponto extremo em relacao a cmp(p, q) = p mais extremo q
+    copiado de https://github.com/gustavoM32/caderno-zika)
+    
+    
+    CIRCUNFERENCIA
+    getcenter -> centro da circunf dado 3 pontos
+    circ_line_inter -> intersecao da circunf (c, r) e reta ab
+    circ_inter -> intersecao da circunf (a, r) e (b, R),
+    assume que as retas tem p < q
+    operator< e == comparador pro set pra fazer sweep line com segmentos
+    assume que os segmentos tem p < q , comparador pro set pra fazer sweep angle com segmentos
+
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Geometry/Geometry - General.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{ClosestPair}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+    Closest pairs - Par de pontos que tem a menor distancia Euclidiana entre si
+    O(n log n)
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Geometry/ClosestPair.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{ConvexHull}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+@\begin{minipage}{0.4\textwidth}
+Given a vector of points, return the convex hull in CCW order. \\
+A convex hull is the smallest convex polygon that contains all the points.
+\end{minipage}\hfill \begin{minipage}{0.05\textwidth} \includegraphics[height=4\baselineskip]{geometry/ConvexHull} \end{minipage} @ 
+
+If you want colinear points in border, change the >=0 to >0 in the while's. 
+@\textbf{WARNING:}@if collinear and all input PT are collinear, may have duplicated points (the round trip)
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Geometry/ConvexHull.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{Point}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+	len() -> O(sqrt(p*p))
+	cross() ->  (a-p) % (b-p)
+	quad() -> Cartesian plane quadrant |0++|1-+|2--|3+-|
+	proj() -> projection size from A to B
+	angle( ) -> Angle between vectors p and q [-pi, pi] | acos(a*b/a.len()/b.len())
+	polarAngle() -> Angle to x-axis [-pi, pi]
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Geometry/Point.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{Poligons}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Geometry/Poligons.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{Segment}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Geometry/Segment.cpp}
+\hrulefill
+
+
+\section{Graphs}
+\vspace{-2pt}
+\subsection{Dijkstra}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+
+Dijkstra - Shortest Paths from Source
+// !!! Change MAXN to N
+caminho minimo de um vertice u para todos os
+outros vertices de um grafo ponderado
+
+Complexity: O(N Log N)
+
+dijkstra(s)				->  s : Source, Origem. As distancias serao calculadas com base no vertice s
+grafo[u] = {v, c};  	->  u : Vertice inicial, v : Vertice final, c : Custo da aresta
+priority_queue<pii, vector<pii>, greater<pii>> ->  Ordena pelo menor custo -> {d, v} -> d : Distancia, v : Vertice
+
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Graphs/Dijkstra.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{BFS}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Graphs/BFS.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{DFS}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Graphs/DFS.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{DSU}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+Disjoint Set Union - Union Find
+Find: O( a(n) ) -> Inverse Ackermann function 
+Join: O( a(n) ) -> a(1e6) <= 5
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Graphs/DSU.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{BellManFord}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+Disjoint Set Union - Union Find
+Find: O( a(n) ) -> Inverse Ackermann function 
+Join: O( a(n) ) -> a(1e6) <= 5
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{../lib/Graphs/BellManFord.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{Floyd-Warshall}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+
+	Floyd-Warshall
+	Encontra o menor caminho entre todo par de vertices e detecta ciclo negativo
+	Returna 1 se ha ciclo negativo
+	d[i][i] deve ser 0
+	para i != j, d[i][j] deve ser w se ha uma aresta (i, j) de w, INF caso contrario
+	O(n³)
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Graphs/Floyd-Warshall.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{EulerPath}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+	Euler Path / Euler Cycle
+	Para declarar: euler<true> E(n) se for direcionado com N vertices
+	As funcoes retornam um par
+		- Booleano indica se ha o path/cycle pedido
+		- Vetor e formada de {vertice, id aresta para chegar no vertice}
+
+	Se for get_path, na primeira posicao o id vai ser -1
+	get_path(src) tenta achar um caminho ou ciclo euleriano, comecando no src
+#warning chamar para o src certo!
+	Se achar um ciclo, o primeiro e o ultimo vertice seram src
+	Se for um P3, um possivel retorno seria [0, 1, 2, 0]
+	get_cycle() acha um ciclo euleriano se o grafo for euleriano
+	Se for um P3, um possivel retorno seria [0,1,2]
+	(Vertice inicial nao se repete)
+
+	O(n + m)
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Graphs/EulerPath.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{EulerTour}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Graphs/EulerTour.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{Kosaraju}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+    Kosaraju (Grafos fortemente conexos)
+
+    g e o grafo (a vai para b)
+    gi e o grafo reverso (b vai para a)
+
+    comp e o componente conexo de cada vertice
+
+    graph_condensed() grafo condensado apenas com as sccs
+    analisa os graus de entrada e saidas de cadas sccs
+
+
+    O(m + n)
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Graphs/Kosaraju.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{MinCostMaxFlow}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+
+MCMF find the maximum possible flow from a source to a sink while ensuring the total cost of flow is minimized
+Cost per unit of flow
+Capacity 
+O(Total Flow + (Edges + Nodes)logNodes)
+
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Graphs/MinCostMaxFlow.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{Kruskal}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+
+Kruskal - Minimum Spanning Tree
+Algoritmo para encontrar a Arvore Geradora Minima (MST)
+-> Complexity: O(E log E) 
+E : Numero de Arestas
+
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Graphs/Kruskal.cpp}
+\hrulefill
+
+
+\section{dp}
+\vspace{-2pt}
+\subsection{LIS}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+LIS - Longest Increasing Subsequence
+
+@\textbf{Complexity:}@ O(N Log N)
+* For ICREASING sequence, use lower_bound()
+* For NON DECREASING sequence, use upper_bound()
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/dp/LIS.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{subsetSum}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+
+    Subset sum
+    Retorna max(x <= t tal que existe subset de w que soma x)
+
+    Complexidade
+    O(n * max(w))
+    O(max(w)) de memoria
+
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/dp/subsetSum.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{LCS}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+LCS - Longest Common Subsequence
+
+@\textbf{Complexity:}@ O(@$ N^{2}$@)
+
+* Recursive: memset(memo, -1, sizeof memo); LCS(0, 0);
+* Iterative: LCS_It();
+
+* RecoverLCS O(N)
+  Recover just one of all the possible LCS
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/dp/LCS.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{SumOVerSubsetDP}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+    SOS DP [nohash]
+    
+    Soma de sub-conjunto e de super-conjunto
+    O(n 2^n)
+
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/dp/SumOVerSubsetDP.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{knapsack}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+
+Resolve mochila, recuperando a resposta
+DP usando os itens [l, r], com capacidade = cap
+v[max] e w[MAX] valor e peso
+
+
+    Complexidade:
+    -> O(n * cap), O(n + cap)
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/dp/knapsack.cpp}
+\hrulefill
+
+
+\section{Strings}
+\vspace{-2pt}
+\subsection{trie}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+Trie - Arvore de Prefixos
+insert(P) - O(|P|)
+count(P)  - O(|P|)
+MAXS  - Soma do tamanho de todas as Strings
+sigma - Tamanho do alfabeto
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Strings/trie.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{Manacher}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+Manacher Algorithm
+Find every palindrome in string
+Complexidade: O(N)
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Strings/Manacher.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{KMP}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+    KMP - Find all occurences of a pattern string inside a text string
+
+    matching(s, t) retorna os indices das ocorrencias de s em t
+    autKMP constroi o automato do KMP
+
+    Complexidades:
+    pi - O(n)
+    match - O(n + m)
+    construir o automato - O(|sigma|*n)
+    n = |padrao| e m = |texto|
+
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Strings/KMP.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{hash}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+String Hash
+precalc()    -> O(N)
+StringHash() -> O(|S|)
+gethash()    -> O(1)
+
+StringHash hash(s);	-> Cria uma struct de StringHash para a string s
+hash.gethash(l, r); -> Retorna o hash do intervalo L R da string (0-Indexado)
+
+IMPORTANTE! Chamar precalc() no inicio do codigo
+
+const ll MOD  = 131'807'699; -> Big Prime Number 
+const ll base = 127;         -> Random number larger than the Alphabet
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Strings/hash.cpp}
+\hrulefill
+
+
+\section{Math}
+\vspace{-2pt}
+\subsection{totient}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+   Totiente de Euler - Conta quantos numeros de 1 ate n sao coprimos de n
+
+   Complexidade:
+   O(sqrt(n))
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Math/totient.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{sieve}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+   Sieve of Eratosthenes - Encontra o maior divisor primo
+   Fact -> Fatora um numero <= limite, sai ordenada
+   Crivo calcula a lista de primos
+   
+   A funcao fact adiciona o numero 1 se vc tentar fatorar o 1.
+   Complexidade:
+   crivo - O(n log(logN))
+   fact - O(log(n))
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Math/sieve.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{ModComb}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+    Combinacao modular
+    Inverso modular
+    Exponenciacao rapida (O (Log P ) - p: potencia)
+    O(N) fatorial
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Math/ModComb.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{Kadane}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+    Algoritmo de Kadane
+    Consegue o max subarray sum
+    O(N)  
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Math/Kadane.cpp}
+\hrulefill
+
+\vspace{-2pt}
+\subsection{Divisors}
+\vspace{-4pt}
+\begin{lstlisting}[style=description]
+    get_divisors(n) -- O(sqrt(N))
+
+\end{lstlisting}
+\vspace{-5pt}
+\raggedbottom\lstinputlisting[style=cpp]{./temp/lib/Math/divisors.cpp}
+\hrulefill
+
+

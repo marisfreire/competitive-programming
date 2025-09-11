@@ -17,15 +17,29 @@ $
 ../lib/Data Structures/BIT.cpp            $ BIT
 ../lib/Data Structures/MergeSortTree.cpp  $ MergeSortTree
 ../lib/Data Structures/PrefixSum2D.cpp    $ PrefixSum2D
+../lib/Data Structures/Lichao.cpp        $ LiChaoTree
+../lib/Data Structures/MergSortTree.cpp        $ MergSortTreeMaleta
+../lib/Data Structures/Cht.cpp        $ CHT
+../lib/Data Structures/chtDinamico.cpp        $ CHTDinamico
 
 [Geometry]
 ../lib/Geometry/Geometry - General.cpp  $ Geometry - General
+../lib/Geometry/ClosestPair.cpp        $ ClosestPair
+../lib/Geometry/ConvexHull.cpp        $ ConvexHull
+../lib/Geometry/Point.cpp        $ Point
+../lib/Geometry/Poligons.cpp        $ Poligons
+../lib/Geometry/Segment.cpp        $ Segment
 
 [Graphs]
 ../lib/Graphs/Dijkstra.cpp        $ Dijkstra
 ../lib/Graphs/BFS.cpp             $ BFS
 ../lib/Graphs/DFS.cpp             $ DFS
 ../lib/Graphs/DSU.cpp             $ DSU
+../lib/Graphs/BellManFord.cpp             $ BellManFord
+../lib/Graphs/Floyd-Warshall.cpp             $ Floyd-Warshall
+../lib/Graphs/EulerPath.cpp             $ EulerPath
+../lib/Graphs/EulerTour.cpp             $ EulerTour
+../lib/Graphs/Kosaraju.cpp             $ Kosaraju
 ../lib/Graphs/MinCostMaxFlow.cpp  $ MinCostMaxFlow
 ../lib/Graphs/Kruskal.cpp         $ Kruskal
 
@@ -38,11 +52,14 @@ $
 
 [Strings]
 ../lib/Strings/trie.cpp  $ trie
+../lib/Strings/Manacher.cpp  $ Manacher
 ../lib/Strings/KMP.cpp   $ KMP
+../lib/Strings/hash.cpp  $ hash
 
 [Math]
 ../lib/Math/totient.cpp  $ totient
 ../lib/Math/sieve.cpp    $ sieve
 ../lib/Math/ModComb.cpp  $ ModComb
-
+../lib/Math/Kadane.cpp  $ Kadane
+../lib/Math/divisors.cpp  $ Divisors
 

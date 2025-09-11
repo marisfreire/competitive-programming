@@ -1,7 +1,7 @@
 import os
 
 code_dir = "../lib"
-#extra_dir = "./extra" # const
+extra_dir = "../lib/Theorems" # const
 div_char = '$'
 
 print(div_char)
@@ -31,10 +31,10 @@ for dir in os.listdir(code_dir):
     print()
 
 print()
-#print("## Extra content - tex files ##")
-#print('[Extra]')
+print("## Extra content - tex files ##")
+print('[Extra]')
 
-#for arquivo in os.listdir(extra_dir):
- #   longestName = max([len(arquivo) if '.exe' not in arquivo else 0 for arquivo in files])
-  #  if(os.path.isfile(os.path.join(extra_dir, arquivo))):
-   #     print(f"{extra_dir}/{arquivo} {' '*(longestPath-len(arquivo))} {div_char}tex")
+for arquivo in os.listdir(extra_dir):
+    longestName = max([len(arquivo) if '.exe' not in arquivo else 0 for arquivo in files])
+    if(os.path.isfile(os.path.join(extra_dir, arquivo))):
+        print(f"{extra_dir}/{arquivo} {' '*(longestPath-len(arquivo))} {div_char}tex")
