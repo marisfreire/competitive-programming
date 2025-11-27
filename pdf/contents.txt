@@ -41,6 +41,7 @@ $
 ../lib/Graphs/EulerTour.cpp             $ EulerTour
 ../lib/Graphs/Kosaraju.cpp             $ Kosaraju
 ../lib/Graphs/MinCostMaxFlow.cpp  $ MinCostMaxFlow
+../lib/Graphs/MinCostMaxFlowSimple.cpp  $ MinCostMaxFlow
 ../lib/Graphs/Kruskal.cpp         $ Kruskal
 
 [dp]
