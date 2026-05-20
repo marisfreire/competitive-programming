@@ -1,84 +1,99 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int MAXN = 1e6 + 5;
-int seg[4*MAXN];
-int lazy[4*MAXN];
+/* Lazy Segment Tree (Range Update, Range Query)
+ * Realiza atualizações e consultas em range.
+ * Complexidade: O(log N) para update e query.
+ * Memória: O(4*N)
+ * Requisitos:
+ * - NODE deve ter: static merge(L, R), apply(TAG, L, R) e
+ *   construtor identidade.
+ * - TAG deve ter: compose(TAG) e construtor identidade.
+ */
 
-void unlazy(int no, int l, int r){
-	if(lazy[no] == 0) return;
+/* --- Exemplo de NODE e TAG (Soma e Multiplicacao com Modulo) ---
+struct Tag {
+    ll mul = 1, add = 0;
+    void inline compose(const Tag& t) {
+        add = (add * t.mul + t.add) % MOD;
+        mul = (mul * t.mul) % MOD;
+    }
+};
 
-	int m=(l+r)/2, e=no*2, d=no*2+1;
+struct Node {
+    ll val = 0;
+    Node(ll v = 0) : val(v) {}
+    static inline Node merge(const Node& l, const Node& r) {
+        return Node((l.val + r.val) % MOD);
+    }
+    void inline apply(const Tag& t, int l, int r) {
+        val = (val * t.mul + t.add * (r - l + 1)) % MOD;
+    }
+};
+*/
 
-	seg[no] += (r-l+1) * lazy[no];
+template<typename NODE, typename TAG>
+struct LazySegmentTree {
+    int N;
+    vector<NODE> seg;
+    vector<TAG> lazy;
 
-	if(l != r){
-		lazy[e] += lazy[no];
-		lazy[d] += lazy[no];
-	}
+    LazySegmentTree(int n) : N(n), seg(4 * n), lazy(4 * n) {}
 
-	lazy[no] = 0;
-}
+    template<typename T>
+    LazySegmentTree(const vector<T>& v)
+        : N(v.size()), seg(4 * v.size()), lazy(4 * v.size()) {
+        build(1, 0, N - 1, v);
+    }
 
-int query(int no, int l, int r, int a, int b){
-	unlazy(no, l, r);
-	if(b <  l || r <  a) return 0;
-	if(a <= l && r <= b) return seg[no];
-	
-	int m=(l+r)/2, e=no*2, d=no*2+1;
+    template<typename T>
+    void build(int no, int l, int r, const vector<T>& v) {
+        if (l == r) {
+            seg[no] = NODE(v[l]);
+            return;
+        }
+        int m = (l + r) >> 1;
+        build(no << 1, l, m, v);
+        build((no << 1) | 1, m + 1, r, v);
+        seg[no] = NODE::merge(seg[no << 1], seg[(no << 1) | 1]);
+    }
 
-	return query(e, l, m, a, b) + query(d, m+1, r, a, b);
-} 
+    void push(int no, int l, int r) {
+        int m = (l + r) >> 1;
+        int e = no << 1, d = e | 1;
 
-void update(int no, int l, int r, int a, int b, int v){
-	unlazy(no, l, r);
-	if(b <  l || r <  a) return;
-	if(a <= l && r <= b)
-	{
-		lazy[no]+= v;
-		unlazy(no, l, r);
-		return;
-	}
+        seg[e].apply(lazy[no], l, m);
+        lazy[e].compose(lazy[no]);
 
-	int m=(l+r)/2, e=no*2, d=no*2+1;
+        seg[d].apply(lazy[no], m + 1, r);
+        lazy[d].compose(lazy[no]);
 
-	update(e, l,   m, a, b, v);
-	update(d, m+1, r, a, b, v);
+        lazy[no] = TAG(); 
+    }
 
-	seg[no] = seg[e] + seg[d];
-}
+    void update(int no, int l, int r, int a, int b, const TAG& v) {
+        if (b < l || r < a) return;
+        if (a <= l && r <= b) {
+            seg[no].apply(v, l, r);
+            lazy[no].compose(v);
+            return;
+        }
+        push(no, l, r);
+        int m = (l + r) >> 1;
+        update(no << 1, l, m, a, b, v);
+        update((no << 1) | 1, m + 1, r, a, b, v);
+        seg[no] = NODE::merge(seg[no << 1], seg[(no << 1) | 1]);
+    }
 
-void build(int no, int l, int r, vector<int> &lista){
-	if(l == r){ seg[no] = lista[l-1]; return; }
+    NODE query(int no, int l, int r, int a, int b) {
+        if (b < l || r < a) return NODE();
+        if (a <= l && r <= b) return seg[no];
+        push(no, l, r);
+        int m = (l + r) >> 1;
+        return NODE::merge(query(no << 1, l, m, a, b),
+                           query((no << 1) | 1, m + 1, r, a, b));
+    }
 
-	int m=(l+r)/2, e=no*2, d=no*2+1;
-
-	build(e, l,   m, lista);
-	build(d, m+1, r, lista);
-	
-	seg[no] = seg[e] + seg[d];
-}
-
-/*LATEX_DESC_BEGIN***************************
-
-Code by SamuelllH12
--> Segment Tree - Lazy Propagation com:
-- Query em Range
-- Update em Range
-
-build (1, 1, n, lista);
-query (1, 1, n, a, b);
-update(1, 1, n, a, b, x);
-
-|   n    | o tamanho máximo da lista
-| [a, b] | o intervalo da busca ou update
-|   x    | o novo valor a ser somada no intervalo [a, b]
-| lista  | o array de elementos originais
-
-Build:  O(N)
-Query:  O(log N)
-Update: O(log N)
-Unlazy: O(1)
-
-
-*****************************LATEX_DESC_END*/
+    void update(int l, int r, const TAG& v) { update(1, 0, N - 1, l, r, v); }
+    NODE query(int l, int r) { return query(1, 0, N - 1, l, r); }
+};
