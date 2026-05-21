@@ -2,23 +2,23 @@
 using namespace std;
 
 /*Create a DSU*/ 
-void join(int u, int v); int find(int u);
-
 const int MAXN = 1e6 + 5;
 struct Aresta{ int u, v, c; };
 bool compAresta(Aresta a, Aresta b){ return a.c < b.c; }
 
 vector<Aresta> arestas; 			
 
-int kruskal(){
+int kruskal(int n){
 	sort(begin(arestas), end(arestas), compAresta);	
-	int resp = 0;					
-	for(auto a : arestas)
-		if( find(a.u) != find(a.v) )
-		{
+	DSU dsu(n); 
+
+	int resp = 0;				
+	for(auto a : arestas) {
+		if (find(a.u) != find(a.v)) {
 			resp += a.c;
 			join(a.u, a.v);
 		}
+	}
 	return resp;
 }
 

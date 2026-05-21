@@ -1,48 +1,45 @@
-#include <bits/stdc++.h>
-using namespace std;
+const int INF = 1e18; 
+using vi = vector<int>; 
+using pii = pair<int,int>; 
+vector<vector<pii>> grafo; 
 
-const int MAXN = 1e6 + 5;
-#define INF 0x3f3f3f3f
-#define vi vector<int>
-#define pii pair<int,int>
-
-vector<pii> grafo [MAXN];
-
-vi dijkstra(int s){
-    
-    vi dist (MAXN, INF); 
+vi dijkstra(int s, int n){
+    vi dist (n, INF); 
     priority_queue<pii, vector<pii>, greater<pii>> fila;
 	fila.push({0, s});
 	dist[s] = 0;
     
-	while(!fila.empty())
-	{
+	while(!fila.empty()) {
         auto [d, u] = fila.top();
 		fila.pop();
 
 		if(d > dist[u]) continue;
 
-		for(auto [v, c] : grafo[u])
-			if( dist[v] > dist[u] + c )
-			{
+		for(auto [c, v] : grafo[u]) {
+			if( dist[v] > dist[u] + c ) {
 				dist[v] = dist[u] + c;
 				fila.push({dist[v], v});
 			}
+		}
 	}
 
 	return dist;
 }
+
 /*LATEX_DESC_BEGIN************************
 
 Dijkstra - Shortest Paths from Source
-// !!! Change MAXN to N
-caminho minimo de um vertice u para todos os
-outros vertices de um grafo ponderado
+Calcula a menor distancia de um vertice s
+para todos os outros vertices do grafo.
+Funciona apenas com pesos >= 0.
 
-Complexity: O(N Log N)
+Complexity: O((N + M) log N)
 
-dijkstra(s)				->  s : Source, Origem. As distancias serao calculadas com base no vertice s
-grafo[u] = {v, c};  	->  u : Vertice inicial, v : Vertice final, c : Custo da aresta
-priority_queue<pii, vector<pii>, greater<pii>> ->  Ordena pelo menor custo -> {d, v} -> d : Distancia, v : Vertice
+grafo[u] = {c, v}
+u -> vertice atual
+v -> destino
+c -> custo da aresta
+
+priority_queue ordena por menor distancia: {distancia, vertice}
 
 ***************************LATEX_DESC_END*/
