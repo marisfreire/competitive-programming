@@ -1,10 +1,12 @@
 \documentclass[10pt,a4paper]{article}
-\usepackage[left=0.6cm, right=0.6cm, top=0.6cm, bottom=0.6cm]{geometry}
+\usepackage[left=0.6cm, right=0.6cm, top=0.3cm, bottom=0.6cm, includehead]{geometry}
 \usepackage{hyperref}
 \usepackage{fancyhdr}
 \usepackage{listings}
-\usepackage{xcolor}
+\usepackage[table]{xcolor}
 \usepackage{tcolorbox}
+\usepackage{adjustbox}
+\usepackage{mdframed}
 \usepackage{tocloft}
 \usepackage{pdflscape}
 \usepackage{multicol}
@@ -15,23 +17,43 @@
 \usepackage{titlesec}
 \usepackage{setspace}
 \usepackage{amsmath} 
+\usepackage{amssymb} 
 \usepackage{etoolbox}
 \usepackage{needspace}
+\usepackage{booktabs}
+
+\newcommand{\university}{Universidade Federal de Pernambuco - UFPE}
+
+\title{\vspace{-5ex}\Large{\underline{
+
+  As boyzinhas - ICPC Library  %% Título
+
+  \includegraphics[height=0.75cm]{maratona_cin.png} %% Logos ao lado do título
+  \includegraphics[height=0.75cm]{spinosaurus.png} 
+
+}}}\author{}\date{}
+
+% Colors of description boxes
+\definecolor{descboxbg}{RGB}{210,220,244}
+\definecolor{descboxfrm}{RGB}{24,79,102}
+\definecolor{blockdescbg}{RGB}{252, 243, 187}
+
+\graphicspath{{./images/}{./temp/}} % Pastas para buscar imagens
+
 
 \tcbuselibrary{listings}
 \tcbuselibrary{breakable, skins} 
 \renewcommand{\arraystretch}{0.85}
-
-\graphicspath{{./images/}{./temp/}} % Pastas para buscar imagens
-
 \renewcommand*{\ttdefault}{pcr}
 \renewcommand\cftsecfont{\fontsize{10}{11}\bfseries}
 \renewcommand\cftsecpagefont{\fontsize{10}{11}\mdseries}
 \renewcommand\cftsubsecfont{\fontsize{8}{9}\mdseries}
 \renewcommand\cftsubsecpagefont{\fontsize{8}{9}\mdseries}
+\renewcommand\cftsubsubsecfont{\fontsize{6}{7}\mdseries}
+\renewcommand\cftsubsubsecpagefont{\fontsize{6}{7}\mdseries}
 \renewcommand\cftsecafterpnum{\vspace{-1ex}}
 \renewcommand\cftsubsecafterpnum{\vspace{-1ex}}
-
+\renewcommand\cftsubsubsecafterpnum{\vspace{-1.2ex}}
 
 \lstdefinestyle{shared}{
   belowcaptionskip=0.05\baselineskip,
@@ -54,7 +76,7 @@
   keywordstyle=\bfseries\color{green!40!black},
   commentstyle=\itshape\color{purple!40!black},
   identifierstyle=\color{blue},
-  stringstyle=\color{orange},
+  stringstyle=\color{purple!40!black},
 }
 \lstdefinestyle{py}{
   style=shared,
@@ -62,26 +84,18 @@
   keywordstyle=\bfseries\color{green!40!black},
   commentstyle=\itshape\color{purple!40!black},
   identifierstyle=\color{blue},
-  stringstyle=\color{orange},
+  stringstyle=\color{purple!40!black},
+}
+\lstdefinestyle{sh}{
+  style=shared,
+  language=bash,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{purple!40!black},
 }
 \lstdefinestyle{txt}{
   style=shared,
-}
-\lstdefinestyle{description}{
-  frame=single,
-  xleftmargin=0pt,
-  basicstyle=\fontsize{7}{8}\ttfamily,
-  rulesepcolor=\color{gray},
-  rulecolor=\color{gray!30},
-  frameround=tttt,
-  breaklines=true,
-  breakatwhitespace=true,
-  showstringspaces=false,
-  tabsize=2,
-  keepspaces=true,                 
-  numbersep=5pt,                  
-  showspaces=false,                
-  showtabs=false,           
 }
 \lstset{
   escapechar=@,
@@ -98,36 +112,83 @@
   bottom=3pt,
   boxsep=2pt
 }
+% LATEX DESC
 
-\pagestyle{fancy}
-\fancyhead[L]{Universidade Federal de Pernambuco - As Boyzinhas}
-\fancyhead[R]{\thepage}
-\fancyfoot[C]{}
-
-\fancypagestyle{plain}{
-\fancyhead[L]{Universidade Federal de Pernambuco - As Boyzinhas}
-\fancyhead[R]{\thepage}
-\fancyfoot[C]{}
+\newtcblisting{listingframe}[2][]{%
+  enhanced,
+  breakable=true,
+  listing only,
+  listing engine=listings,
+  colback=descboxbg,
+  colframe=descboxfrm,
+  top=-1mm, bottom=-1mm, left=2mm, right=2mm,
+  boxrule=0.6pt,
+  arc=2mm,
+  outer arc=2mm,
+  borderline={0.5pt}{0pt}{descboxfrm},
+  % shadow={0pt}{-1.5pt}{3pt}{black!12},
+  listing options={breaklines, style=shared, #2}
 }
 
-\title{\vspace{-4ex}\Large{Lib das Boyzinhas}}
-\author{}
-\date{}
+
+%%% BLOCK_DESC BEGIN %%%
+\newmdenv[
+  backgroundcolor=blockdescbg,
+  linecolor=gray!30,
+  linewidth=0.4pt,
+  roundcorner=4pt,
+  leftmargin=0pt,
+  rightmargin=0pt,
+  innerleftmargin=4pt,
+  innerrightmargin=4pt,
+  innertopmargin=2pt,
+  innerbottommargin=2pt,
+  skipabove=0pt,
+  skipbelow=1pt,
+  font=\fontsize{6}{7}\ttfamily,
+]{blockdescenv}
+
+\newcommand{\blockdesc}[1]{%
+  \par\vspace{-5pt}
+  \noindent
+  \begin{adjustbox}{minipage=\dimexpr\linewidth-2\fboxsep-2\fboxrule}
+    \begin{blockdescenv}
+      #1
+    \end{blockdescenv}
+  \end{adjustbox}
+  \vspace{1pt}
+}
+%%% BLOCK_DESC END %%%
+
+\pagestyle{fancy}
+\fancyhead[L]{}
+\fancyhead[R]{\rotatebox{90}{\scriptsize\thepage}}
+\fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0pt}
+
+\fancypagestyle{plain}{
+\fancyhead[L]{\scriptsize\university}
+\fancyhead[R]{\rotatebox{90}{\scriptsize\thepage}}
+\fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0.2pt}
+}
 
 \begin{document}
 \begin{landscape}
-\begin{multicols*}{3}  % MUDE A QUANTIDADE DE COLUNAS AQUI
+\begin{multicols}{3}  % MUDE A QUANTIDADE DE COLUNAS AQUI
 \raggedcolumns 
-\interlinepenalty=10000
+\interlinepenalty=1000000000
+\linepenalty=1000000000
+\widowpenalty=1000000000
 
 \maketitle
 \vspace{-13ex}
+{\tiny\today} \vspace{-3ex}
 \tableofcontents
-% \begin{center}\includegraphics[height=0.3\linewidth]{ascii-art.png}\centering\vspace{-3pt}\footnotesize\textit{}\end{center}
 \pagestyle{fancy}
 
 \input contents.tex
 
-\end{multicols*}
+\end{multicols}
 \end{landscape}
 \end{document}

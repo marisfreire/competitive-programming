@@ -22,13 +22,13 @@ void crivo_mobius(ll lim) {
         if (!divi[i]) {
             divi[i] = i;
             primes.push_back(i);
-            mobius[i] = -1; // primo → μ = -1
+            mobius[i] = -1; 
         }
         for (int p : primes) {
             if (p > divi[i] || 1LL * i * p > lim) break;
             divi[i*p] = p;
             if (i % p == 0) {
-                mobius[i*p] = 0; // quadrado → μ = 0
+                mobius[i*p] = 0; 
                 break;
             } else {
                 mobius[i*p] = -mobius[i];

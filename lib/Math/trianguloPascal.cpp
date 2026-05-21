@@ -3,7 +3,7 @@ using namespace std;
 
 const int MOD = 1e9 + 7; 
 
-//O(N²)
+//O(N ao quadrado)
 //Pré-computa os coeficientes binomiais (combinações) usando o Triângulo de Pascal.
 //De quantas formas posso escolher k elementos distintos a partir de um conjunto de n elementos?
 //limite O valor máximo de 'n' que você deseja calcular (geralmente determinado por 'maxi').

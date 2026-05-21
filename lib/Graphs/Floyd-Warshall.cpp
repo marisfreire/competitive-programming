@@ -21,5 +21,5 @@ bool floyd_warshall() {
 	Returna 1 se há ciclo negativo
 	d[i][i] deve ser 0
 	para i != j, d[i][j] deve ser w se há uma aresta (i, j) de w, INF caso contrário
-	O(n³)
+	O(n ao cubo)
 *****************************LATEX_DESC_END*/

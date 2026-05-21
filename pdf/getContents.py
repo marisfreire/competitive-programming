@@ -1,7 +1,7 @@
 import os
 
 code_dir = "../lib"
-extra_dir = "../lib/Theorems" # const
+extra_dir = "./extra" # const
 div_char = '$'
 
 print(div_char)
@@ -14,6 +14,8 @@ note = f'''
 # Subsections within a section should follow the format:
 # (filename within code directory)(divisor character:{div_char})(subsection title)
 # div character:{div_char}
+
+# If you add an '@' at the end of a file title, that file will not be hashed, even if use_hash is true.
 '''
 print(note)
 
